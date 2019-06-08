@@ -25,7 +25,6 @@ function createIgnorer(ignorePath, withNodeModules) {
  * @param {undefined | boolean} withNodeModules
  */
 createIgnorer.sync = function(ignorePath, withNodeModules) {
-  console.log("@@@ createIgnorer.sync", ignorePath, withNodeModules);
   if (!ignorePath) {
     return new RecursiveIgnorer({ withNodeModules });
   }
@@ -39,9 +38,7 @@ class RecursiveIgnorer {
   }
 
   ignores(filePath) {
-    console.log("@@@ ignores", filePath);
     filePath = path.resolve(filePath);
-    console.log("@@@ after being absolute:", filePath);
     const { withNodeModules } = this;
     const root = repoRoot(filePath);
     const relativePath = path.relative(root, filePath);
@@ -88,7 +85,6 @@ function isDirectory(dir) {
 
 // https://github.com/isomorphic-git/isomorphic-git/blob/885db9c/src/managers/GitIgnoreManager.js
 function isIgnored({ dir, relativePath, withNodeModules }) {
-  console.log("@@@ isIgnored", { dir, relativePath, withNodeModules });
   // Find all the .prettierignore files that could affect this file
   const pairs = [
     {

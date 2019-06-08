@@ -28,7 +28,10 @@ describe("extracts file-info for a known markdown file with no extension", () =>
 });
 
 describe("extracts file-info with ignored=true for a file in .prettierignore", () => {
-  runPrettier("cli/ignore-path/", ["--file-info", "regular-module.js"]).test({
+  runPrettier("cli/ignore-path/ignore-regular/", [
+    "--file-info",
+    "ignore-regular/regular-module.js"
+  ]).test({
     status: 0
   });
 });
@@ -36,8 +39,8 @@ describe("extracts file-info with ignored=true for a file in .prettierignore", (
 describe("extracts file-info with ignored=true for a file in a hand-picked .prettierignore", () => {
   runPrettier("cli/", [
     "--file-info",
-    "regular-module.js",
-    "--ignore-path=ignore-path/.prettierignore"
+    "ignore-regular/regular-module.js",
+    "--ignore-path=ignore-path/ignore-regular/.prettierignore"
   ]).test({
     status: 0
   });
@@ -134,10 +137,10 @@ test("API getFileInfo.sync with filepath only", () => {
 
 test("API getFileInfo with ignorePath", () => {
   const file = path.resolve(
-    path.join(__dirname, "../cli/ignore-path/regular-module.js")
+    path.join(__dirname, "../cli/ignore-path/ignore-nothing/regular-module.js")
   );
   const ignorePath = path.resolve(
-    path.join(__dirname, "../cli/ignore-path/.prettierignore")
+    path.join(__dirname, "../cli/ignore-path/ignore-regular/.prettierignore")
   );
 
   expect(prettier.getFileInfo(file)).resolves.toMatchObject({
@@ -157,10 +160,10 @@ test("API getFileInfo with ignorePath", () => {
 
 test("API getFileInfo.sync with ignorePath", () => {
   const file = path.resolve(
-    path.join(__dirname, "../cli/ignore-path/regular-module.js")
+    path.join(__dirname, "../cli/ignore-path/ignore-nothing/regular-module.js")
   );
   const ignorePath = path.resolve(
-    path.join(__dirname, "../cli/ignore-path/.prettierignore")
+    path.join(__dirname, "../cli/ignore-path/ignore-regular/.prettierignore")
   );
 
   expect(prettier.getFileInfo.sync(file)).toMatchObject({

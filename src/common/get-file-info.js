@@ -34,15 +34,12 @@ function getFileInfo(filePath, opts) {
  * @returns {FileInfoResult}
  */
 getFileInfo.sync = function(filePath, opts) {
-  console.log("@@@ getFileInfo.sync", filePath, opts.ignorePath);
   const ignorer = createIgnorer.sync(opts.ignorePath, opts.withNodeModules);
   const normalized = normalizeFilePath(filePath, opts.ignorePath);
-  console.log("@@@ normalized =", normalized);
   return _getFileInfo(ignorer, normalized, opts.plugins);
 };
 
 function _getFileInfo(ignorer, filePath, plugins) {
-  console.log("@@@ _getFileInfo", ignorer, filePath, plugins);
   const ignored = ignorer.ignores(filePath);
   const inferredParser = options.inferParser(filePath, plugins) || null;
 
