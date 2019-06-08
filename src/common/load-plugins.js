@@ -1,13 +1,13 @@
 "use strict";
 
 const uniqBy = require("lodash.uniqby");
-const fs = require("fs");
 const globby = require("globby");
 const path = require("path");
 const resolve = require("resolve");
 const thirdParty = require("./third-party");
 const internalPlugins = require("./internal-plugins");
 const partition = require("../utils/partition");
+const isDirectory = require("../utils/is-directory");
 
 function loadPlugins(plugins, pluginSearchDirs) {
   if (!plugins) {
@@ -105,11 +105,4 @@ function findPluginsInNodeModules(nodeModulesDir) {
   return pluginPackageJsonPaths.map(path.dirname);
 }
 
-function isDirectory(dir) {
-  try {
-    return fs.statSync(dir).isDirectory();
-  } catch (e) {
-    return false;
-  }
-}
 module.exports = loadPlugins;
