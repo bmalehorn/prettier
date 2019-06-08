@@ -91,14 +91,7 @@ async function preparePackage() {
   await util.copyFile("./LICENSE", "./dist/LICENSE");
 }
 
-async function run(params) {
-  await execa("rm", ["-rf", "dist"]);
-  await execa("mkdir", ["-p", "dist"]);
-
-  if (params["purge-cache"]) {
-    await execa("rm", ["-rf", ".cache"]);
-  }
-
+async function run() {
   const bundleCache = new Cache(".cache/", "v12");
   await bundleCache.load();
 
