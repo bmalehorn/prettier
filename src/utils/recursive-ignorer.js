@@ -72,9 +72,10 @@ function isIgnored({ dir, relativePath, withNodeModules }) {
     try {
       file = fs.readFileSync(ignoreFile, "utf8");
     } catch (err) {
-      if (err.code === "NOENT") {
+      if (err.code === "ENOENT") {
         continue;
       }
+      throw err;
     }
     const ign = ignore().add(file);
     if (!withNodeModules) {
